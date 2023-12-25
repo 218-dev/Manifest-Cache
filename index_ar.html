@@ -18,7 +18,7 @@
 }
 input{
     width: 400px;
-    max-width: 50%;
+    max-width: 60%;
     padding: 5px;
     border: solid 2px rgb(44, 47, 49);
     border-radius: 5px;
@@ -43,6 +43,7 @@ input:hover {
     margin-bottom: 2px;
     margin-left: 2px;
     margin-right: 2px;
+    direction: rtl;
 }
 .btn:hover {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
@@ -55,7 +56,7 @@ textarea {
     background-color: rgb(19, 21, 22);
     color: rgb(172, 164, 154);
     outline: none;
-    
+    direction: ltr;
     font-family: monospace;
     font-style: italic;
 } 
@@ -75,9 +76,11 @@ textarea {
     padding: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
+    direction: rtl;
 } 
 a{
 color: rgb(172, 164, 154);
+direction: rtl;
 	} 
 	.window-header {
     height: 35px;
@@ -112,6 +115,7 @@ color: rgb(172, 164, 154);
 } 
 d_name {
     font-size: 12px;
+    direction: rtl;
 }
 a {
     color: rgb(0, 180, 255);
@@ -124,17 +128,67 @@ a {
 * {
   font-family: font;
 }
+input[type=file]::file-selector-button{
+  background: rgb(44, 47, 49);
+  color: rgb(172, 164, 154);
+    border: solid 2px rgb(44, 47, 49);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+    font-family: font;
+    cursor: pointer;
+    transition: 150ms;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.drop-container {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dashed #555;
+  color: #444;
+  cursor: pointer;
+  transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.drop-container:hover,
+.drop-container.drag-active {
+  border-color: rgb(172, 164, 154);
+}
+
+.drop-container:hover .drop-title,
+.drop-container.drag-active .drop-title {
+  color: #222;
+}
+
+.drop-title {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color .2s ease-in-out;
+} 
 		</style>
     <div class="container">
         <img class="logo" src="./cache.png" alt="">
-        <h1>Manifest ملف بيان ذاكرة التخزين المؤقت </h1><span class="d_name">طورت بواسطة  <a href="">@dev_218</a></span>
+        <h1 style="direction: rtl;">مولد  Manifest ذاكرة التخزين المؤقت </h1><span class="d_name">طورت بواسطة  <a href="https://twitter.com/218_dev" >@218_dev</a></span>
     </div>
                 <div class="form-group">
                 	<br>
-                    <label for="fileUpload">رفع ملفات:</label><br><br>
+                          <label for="fileUpload" class="drop-container" id="dropcontainer">
+  <span class="drop-title">قم بوضع الملفات هنا </span>
+  أو <br><br>
                     <input type="file" style="font-family: font;" id="fileUpload" multiple>
                 </div><br>
-                <button class="btn btn-primary" onclick="generateManifest()">إنشاء Manifest ذاكرة التخزين المؤقت </button><a href="#" id="downloadLink" class="btn btn-secondary" download="manifest.appcache">تحميل Manifest </a>
+                <button class="btn btn-primary" onclick="generateManifest()">إنشاء Manifest ذاكرة التخزين المؤقت </button><a href="#" id="downloadLink" download="manifest.appcache" class="btn">تحميل Manifest </a>
                 <div class="form-group"><br><br>
                     <label for="manifestOutput">إخراج Manifest ذاكرة التخزين المؤقت: </label><br><br>
                     	    <div class="window">
@@ -146,7 +200,7 @@ a {
     </div>
     <br>
         <div class="credit">
-        <p><u>تويتر </u>:<span id="year">@dev_218</span><br>تصميم :@bishalqx980</p>
+        <p><u>تويتر </u>:<span id="year">@218_dev</span><br>تصميم :@bishalqx980</p>
         	<a href="index.html">النسخة الإنجليزية 
 </a>
     </div>
