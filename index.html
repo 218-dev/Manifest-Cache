@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cache Manifest File Generator</title>
+</head>
+<body>
+	<style>
+		body {
+    width: 96%;
+    margin: auto;
+    background-color: rgb(19, 21, 22);
+    color: rgb(172, 164, 154);
+    font-family: monospace;
+    text-align: center;
+    padding: 20px;
+}
+input{
+    width: 400px;
+    max-width: 50%;
+    padding: 5px;
+    border: solid 2px rgb(44, 47, 49);
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    outline: none;
+    font-family: monospace;
+}
+input:hover {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+.btn {
+    background-color: rgb(27, 29, 30);
+    color: rgb(172, 164, 154);
+    border: solid 2px rgb(44, 47, 49);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+    font-family: font;
+    cursor: pointer;
+    transition: 150ms;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.btn:hover {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+} 
+textarea {
+    width: 720px;
+    max-width: 100%;
+    height: 200px;
+    padding: 5px;
+    background-color: rgb(19, 21, 22);
+    color: rgb(172, 164, 154);
+    outline: none;
+    
+    font-family: monospace;
+    font-style: italic;
+} 
+::-webkit-scrollbar {
+    background-color: rgb(44, 47, 49);
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(27, 29, 30);
+} 
+.credit {
+    width: 720px;
+    max-width: 50%;
+    margin: auto;
+    text-align: center;
+    background-color: rgb(27, 29, 30);
+    padding: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+} 
+a{
+color: rgb(172, 164, 154);
+	} 
+	.window-header {
+    height: 35px;
+    background: rgb(44, 47, 49);
+    position: relative;
+}
+.window {
+    width: 720px;
+    max-width: 80%;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    border: solid 5px rgb(44, 47, 49);
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+} 
+.window-buttons {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    margin-top: -5px;
+    width: 10px;
+    height: 10px;
+    background: Crimson;
+    border-radius: 50%;
+    box-shadow: 15px 0 0 Orange, 30px 0 0 LimeGreen;
+} 
+.logo {
+    width: 64px;
+    height: 64px;
+} 
+d_name {
+    font-size: 12px;
+}
+a {
+    color: rgb(0, 180, 255);
+}
+     @font-face {
+  font-family: font;
+  src: url(Tajawal-Bold.ttf);
+}
+
+* {
+  font-family: font;
+}
+		</style>
+    <div class="container">
+        <img class="logo" src="./cache.png" alt="">
+        <h1>Cache Manifest File Generator</h1><span class="d_name">Developed by <a href="">@dev_218</a></span>
+    </div>
+                <div class="form-group">
+                	<br>
+                    <label for="fileUpload">Upload Files:</label><br><br>
+                    <input type="file" class="form-control-file" id="fileUpload" multiple>
+                </div><br>
+                <button class="btn btn-primary" onclick="generateManifest()">Generate Cache Manifest</button><a href="#" id="downloadLink" class="btn btn-secondary" download="manifest.appcache">Download Manifest</a>
+                <div class="form-group"><br><br>
+                    <label for="manifestOutput">CACHE MANIFEST Output:</label><br><br>
+                    	    <div class="window">
+        <div class="window-header">
+            <div class="window-buttons"></div>
+        </div>
+                    <textarea id="manifestOutput" rows="10" readonly></textarea>
+        </div>
+    </div>
+    <br>
+        <div class="credit">
+        <p><u>twitter</u>:<span id="year">@dev_218</span><br>design:@bishalqx980</p>
+        	<a href="index_ar.html">Arabic version</a>
+    </div>
+    <script>
+        document.getElementById('fileUpload').addEventListener('change', (event) => {
+            let fileList = [];
+            for (let i = 0; i < event.target.files.length; i++) {
+                fileList.push(event.target.files[i].name);
+            }
+            document.getElementById('manifestOutput').value = fileList.join('\n');
+        });
+
+        function generateManifest() {
+            let fileList = document.getElementById('manifestOutput').value.split('\n');
+
+            let manifest = `CACHE MANIFEST
+# Cache version: v1
+
+CACHE:
+${fileList.join('\n')}
+
+NETWORK:
+*
+`;
+            document.getElementById('manifestOutput').value = manifest;
+
+            let blob = new Blob([manifest], {type: 'text/cache-manifest'});
+            let url = URL.createObjectURL(blob);
+         
+            document.getElementById('downloadLink').href = url;
+        }
+    </script>
+</body>
+</html>
