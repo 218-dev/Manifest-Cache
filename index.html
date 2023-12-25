@@ -18,7 +18,7 @@
 }
 input{
     width: 400px;
-    max-width: 50%;
+    max-width: 60%;
     padding: 5px;
     border: solid 2px rgb(44, 47, 49);
     border-radius: 5px;
@@ -124,6 +124,54 @@ a {
 * {
   font-family: font;
 }
+input[type=file]::file-selector-button{
+  background: rgb(44, 47, 49);
+  color: rgb(172, 164, 154);
+    border: solid 2px rgb(44, 47, 49);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+    font-family: font;
+    cursor: pointer;
+    transition: 150ms;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.drop-container {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dashed #555;
+  color: #444;
+  cursor: pointer;
+  transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.drop-container:hover,
+.drop-container.drag-active {
+  border-color: rgb(172, 164, 154);
+}
+
+.drop-container:hover .drop-title,
+.drop-container.drag-active .drop-title {
+  color: #222;
+}
+
+.drop-title {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color .2s ease-in-out;
+} 
 		</style>
     <div class="container">
         <img class="logo" src="./cache.png" alt="">
@@ -131,8 +179,10 @@ a {
     </div>
                 <div class="form-group">
                 	<br>
-                    <label for="fileUpload">Upload Files:</label><br><br>
-                    <input type="file" class="form-control-file" id="fileUpload" multiple>
+                   <label for="fileUpload" class="drop-container" id="dropcontainer">
+  <span class="drop-title">Drop files here</span>
+  or<br><br>
+                    <input type="file" style="font-family: font;" id="fileUpload" multiple>
                 </div><br>
                 <button class="btn btn-primary" onclick="generateManifest()">Generate Cache Manifest</button><a href="#" id="downloadLink" class="btn btn-secondary" download="manifest.appcache">Download Manifest</a>
                 <div class="form-group"><br><br>
@@ -178,5 +228,7 @@ NETWORK:
             document.getElementById('downloadLink').href = url;
         }
     </script>
+    <script>
+    </script> 
 </body>
 </html>
